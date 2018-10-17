@@ -1,0 +1,18 @@
+---
+# This playbook tests the script module on Windows hosts
+
+- name: install all updates
+  hosts: all 
+  gather_facts: false
+  tasks:
+    - name: Run powershell script
+      win_updates:
+       category_names: SecurityUpdates
+       state: installed
+       log_path: c:\home\update.txt
+
+- name: reboot host if required
+  tasks:
+    - name: reboot  
+      win_reboot:
+      when: update-result.reboot_required
