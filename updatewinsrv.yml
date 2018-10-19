@@ -8,8 +8,8 @@
     - name: Run powershell script
       win_updates:
        category_names: 
-       - SecurityUpdates
-       - CriticalUpdates
+        - SecurityUpdates
+        - CriticalUpdates
        state: installed
        log_path: c:\home\update.txt
 
