@@ -1,10 +1,7 @@
-- name: installed aplication in Chocolatey
-- hosts: srv-metal
-  gather_facts: no
+---
+- name: Install app chocolatey
+  hosts: all
+  gather_facts: false
   tasks:
-  - win_chocolatey :
-      name: 7zip
-      state: present
-      - win_chocolatey :
-      name: firefox
-      state: present
+    - name: install app chocolatey
+      win_chocolatey: name=winrar state=present
