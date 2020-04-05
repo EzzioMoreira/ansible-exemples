@@ -104,24 +104,24 @@
         host: localhost
         state: preset
         
-      - name: Download Composer installer. 
-          get_url:
-          url: https://getcomposer.org/installer
-          dest: /tmp/composer-installer.php
-          mode: 0755
+    - name: Download Composer installer. 
+      get_url:
+        url: https://getcomposer.org/installer
+        dest: /tmp/composer-installer.php
+        mode: 0755
         
-      - name: Run Composer installer.
-        command: >
-          php composer-installer.php
-          chdir=/tmp
-          creates=/usr/local/bin/composer
+    - name: Run Composer installer.
+      command: >
+        php composer-installer.php
+        chdir=/tmp
+        creates=/usr/local/bin/composer
           
-      - name: Move composer into globally-accessible location.
-        command: >
-          mv /tmp/composer.phar /usr/local/bin/composer
-          creates=/usr/local/bin/composer
-      
-      - name: Check out drush 8.x branch.
+    - name: Move composer into globally-accessible location.
+      command: >
+        mv /tmp/composer.phar /usr/local/bin/composer
+        creates=/usr/local/bin/composer
+     
+    - name: Check out drush 8.x branch.
       git:
         repo: https://github.com/drush-ops/drush.git
         version: 8.x
@@ -138,7 +138,7 @@
         dest: /usr/local/bin/drush
         state: link
     
-     - name: Check out Drupal Core to the Apache docroot.
+    - name: Check out Drupal Core to the Apache docroot.
       git:
         repo: https://git.drupal.org/project/drupal.git
         version: "{{ drupal_core_version }}"
