@@ -1,7 +1,0 @@
----
-- name: Install app chocolatey
-  hosts: all
-  gather_facts: false
-  tasks:
-    - name: install app chocolatey
-      win_chocolatey: name=winrar state=present
