@@ -1,0 +1,29 @@
+- name: playbook para o vagrant
+  hosts: all
+  become: yes
+  tasks:
+   - name: instalando epel-release
+     package:
+       name: epel-release
+       state: present
+   - name: instaland o vim
+     package:
+         name: vim
+         state: present
+   - name: copiando a chave privada de ssh
+     copy:
+      src: devops
+      dest: /root/
+      mode: 0600
+     when: ansible_hostname == "node1"
+   - name: copiando chave publica
+     lineinfile:
+      path: /home/vagrant/.ssh/authorized_keys
+      line: "{{ lookup('file','devops.pub') }}"
+   - name: linhas padroes
+     blockinfile:
+     path: /etc/hosts
+     block: |
+      192.168.33.101 node1.metal.corp
+      192.168.33.102 node2.metal.corp
+      192.168.33.103 node3.metal.corp
