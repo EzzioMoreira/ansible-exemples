@@ -1,17 +1,21 @@
 ---
 - hosts: all
   become: yes
-  
-  vars_file:
-   - vars.yml
+
+  vars_files:
+    - vars.yml
+
   pre_tasks:
-   - name: Update yum cache if needed
-     yum: update_cache=yes cache_valid_time=3600
-  handlerss:
-   - name: restart apache
-     service: name=apache2 state=restarted
+    - name: Update apt cache if needed.
+      apt: update_cache=yes cache_valid_time=3600
+
+  handlers:
+    - name: restart apache
+      service: name=apache2 state=restarted
+
   tasks:
-   - name: Get software for yum repository management.
-     yum:
-      name:
-       - python-
+    - name: Get software for apt repository management.
+      apt:
+        state: present
+        name:
+          - python-apt
