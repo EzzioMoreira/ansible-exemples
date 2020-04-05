@@ -6,7 +6,7 @@
      package:
        name: epel-release
        state: present
-   - name: instaland o vim
+   - name: instaland oo vim
      package:
          name: vim
          state: present
@@ -20,10 +20,14 @@
      lineinfile:
       path: /home/vagrant/.ssh/authorized_keys
       line: "{{ lookup('file','devops.pub') }}"
+   - name: arquivos padroes do system
+     template:
+      src: hosts
+      dest: /etc/hosts
    - name: linhas padroes
      blockinfile:
-     path: /etc/hosts
-     block: |
-      192.168.33.101 node1.metal.corp
-      192.168.33.102 node2.metal.corp
-      192.168.33.103 node3.metal.corp
+      path: /etc/hosts
+      block: |
+        192.168.33.101 node1.metal.corp
+        192.168.33.102 node2.metal.corp
+        192.168.33.103 node3.metal.corp
